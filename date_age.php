@@ -1,26 +1,27 @@
 <?php
-
-
 $html = "
 <form method='POST' action=''>
+<label>Full Name</label><br>
+<input name='fname' type='text'><br>
 <label>Date of Birth</label><br>
 <input name='dob' type='date'><br>
-<label>Current Year</label><br>
-<input name='cy' type='date'><br>
-<button name='Age' type='submit'>Subtract</button>
+<button name='Age' type='submit'>Calculate</button>
 </form>
 ";
 
-if(isset($_POST["Age"])){
-// Creates DateTime objects
-$datetime1 = date_create("dob");
-$datetime2 = date_create("cy");
+echo $html;
 
-// Calculates the difference between DateTime objects
-$interval = date_diff($datetime1, $datetime2);
+if (isset($_POST["Age"])) {
+    $fname = $_POST["fname"];
+    $dob = $_POST["dob"];
 
-// Display the result
-echo $interval->format("Difference between two dates: %R%a days");
+  
+    $datetime1 = date_create($dob);
+    $datetime2 = date_create(date("Y-m-d")); 
+
+    $interval = date_diff($datetime1, $datetime2);
+
+   
+    echo "Hello " . $fname . " your age is " . $interval->y;
 }
-
 ?>
